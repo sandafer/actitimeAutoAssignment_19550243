@@ -13,7 +13,7 @@ public class UsersPage extends TestBase {
 
     @FindBy(xpath = "//*[@class='pagetitle']//span[text() = \"List of Users\"]")
     WebElement usersPageTitle;
-    @FindBy(xpath = "//table[@class='userListTable canEditUsers sortByName']")
+    @FindBy(xpath = "//table[contains(@class,'userListTable canEditUsers')]")
     WebElement usersTable;
     @FindBy(className = "userListRow")
     List<WebElement> userList;

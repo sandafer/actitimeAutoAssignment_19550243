@@ -35,6 +35,56 @@ public class TimeTrackPage extends TestBase {
         approveTimeTrackNav.click();
     }
 
+    // Start Approve time page
+    @FindBy(xpath = "//*[@class='pagetitle'][text() = 'Approve Time-Track']")
+    WebElement approveTimeTrackPageTitle;
+    @FindBy(id = "approveButton")
+    WebElement approveBtn;
+    @FindBy(id = "rejectButton")
+    WebElement rejectBtn;
+    @FindBy(id = "approveTTTable")
+    WebElement approveTable;
+    @FindBy(className = "userNameInfo")
+    List<WebElement> userNameListInApproveTable;
+    @FindBy(xpath = "//table[@id='approveTTTable']//tbody[@class='data']//td//input[@type='checkbox']")
+    WebElement approveTableFirstUserCheckBox;
+
+    // Methods
+    public Boolean validateApproveTimeTrackPageTitle() {
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        return approveTimeTrackPageTitle.isDisplayed();
+    }
+
+    public Boolean validateApproveTable() {
+        return approveTable.isDisplayed();
+    }
+
+    public void clickApproveBtn() {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        approveBtn.click();
+    }
+
+    public void clickRejectBtn() {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        rejectBtn.click();
+    }
+
+    public void selectFirstUserCheckBox() {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        if (userNameListInApproveTable.size() > 0) {
+            approveTableFirstUserCheckBox.click();
+        } else {
+            System.out.println("----List of users in Approve table is zero----");
+            System.exit(0);
+        }
+    }
+
+    public Boolean validateUserNameListCount() {
+        if (userNameListInApproveTable.size() == 0) {
+            return false;
+        } else
+            return true;
+    }
 
 
 }

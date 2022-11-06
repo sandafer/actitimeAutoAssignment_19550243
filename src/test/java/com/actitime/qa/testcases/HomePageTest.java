@@ -76,6 +76,16 @@ public class HomePageTest extends TestBase {
         Assert.assertTrue(timeTrackPage.validateApproveTimeTrackNav(), "Cannot find the Approve time track Navigation panel");
         timeTrackPage.clickApproveTimeTrackPanel();
 
+
+        Assert.assertTrue(timeTrackPage.validateApproveTimeTrackPageTitle(), "Cannot find the Approve Time Track section page title");
+        Assert.assertTrue(timeTrackPage.validateApproveTable(), "Cannot find the Approve Time Track table");
+        Assert.assertTrue(timeTrackPage.validateUserNameListCount(), "List of users in Approve table is zero");
+        timeTrackPage.selectFirstUserCheckBox();
+        timeTrackPage.clickRejectBtn();
+
+        driver.navigate().refresh();
+        timeTrackPage.selectFirstUserCheckBox();
+        timeTrackPage.clickApproveBtn();
     }
 
 
