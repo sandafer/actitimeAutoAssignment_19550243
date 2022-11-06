@@ -13,6 +13,7 @@ public class HomePageTest extends TestBase {
     HomePage homePage;
     UsersPage usersPage;
     ReportsPage reportsPage;
+    TimeTrackPage timeTrackPage;
     public HomePageTest() {
         super();
 
@@ -26,6 +27,7 @@ public class HomePageTest extends TestBase {
         homePage = loginPage.loging(properties.getProperty("username"), properties.getProperty("password"));
         usersPage = new UsersPage();
         reportsPage = new ReportsPage();
+        timeTrackPage = new TimeTrackPage();
 
     }
 
@@ -66,6 +68,16 @@ public class HomePageTest extends TestBase {
         Assert.assertEquals(reportsPage.getReportName(), "Scheduled vs. Worked Hours+Overtime", "Incorrect report name is displayed");
 
     }
+    @Test(priority = 4)
+    public void homePageApproveAndRejectTimeTest() {
+
+        homePage.clickOnTimeTrackLink();
+        Assert.assertTrue(timeTrackPage.validateTimeTrackPageTitle(), "Cannot find the Time Track section page title");
+        Assert.assertTrue(timeTrackPage.validateApproveTimeTrackNav(), "Cannot find the Approve time track Navigation panel");
+        timeTrackPage.clickApproveTimeTrackPanel();
+
+    }
+
 
     @AfterMethod
     public void tearDown() {
