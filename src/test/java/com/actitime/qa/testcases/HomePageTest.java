@@ -57,6 +57,14 @@ public class HomePageTest extends TestBase {
         Assert.assertTrue(reportsPage.validateLeaveChart(), "Cannot find the Leave Chart in Reports section");
         reportsPage.clickLeaveChart();
 
+        //assertion fail needs to be checked
+        Assert.assertEquals(reportsPage.getReportName(), "Chart: Past Month's Leaves", "Incorrect report name is displayed");
+        reportsPage.clickCancelBtnInCreateChart();
+
+
+        reportsPage.clickAttendanceChart();
+        Assert.assertEquals(reportsPage.getReportName(), "Scheduled vs. Worked Hours+Overtime", "Incorrect report name is displayed");
+
     }
 
     @AfterMethod
