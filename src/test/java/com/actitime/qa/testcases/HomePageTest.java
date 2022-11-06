@@ -11,6 +11,7 @@ public class HomePageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
+    UsersPage usersPage;
 
     public HomePageTest() {
         super();
@@ -23,7 +24,7 @@ public class HomePageTest extends TestBase {
         initialization();
         loginPage = new LoginPage();
         homePage = loginPage.loging(properties.getProperty("username"), properties.getProperty("password"));
-
+        usersPage = new UsersPage();
 
     }
 
@@ -36,6 +37,16 @@ public class HomePageTest extends TestBase {
 
     }
 
+    @Test(priority = 2)
+    public void homePageUsersLinkTest() {
+
+        homePage.clickOnUsersLink();
+        Assert.assertTrue(usersPage.validateUserPageTitle(), "Cannot find the Users section page title");
+        Assert.assertTrue(usersPage.validateUserTable(), "Cannot find the Users Table");
+        Assert.assertTrue(usersPage.validateUserListCount(), "List of users in Users Table is zero");
+
+
+    }
 
 
     @AfterMethod
