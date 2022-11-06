@@ -12,7 +12,7 @@ public class HomePageTest extends TestBase {
     LoginPage loginPage;
     HomePage homePage;
     UsersPage usersPage;
-
+    ReportsPage reportsPage;
     public HomePageTest() {
         super();
 
@@ -25,6 +25,7 @@ public class HomePageTest extends TestBase {
         loginPage = new LoginPage();
         homePage = loginPage.loging(properties.getProperty("username"), properties.getProperty("password"));
         usersPage = new UsersPage();
+        reportsPage = new ReportsPage();
 
     }
 
@@ -48,6 +49,15 @@ public class HomePageTest extends TestBase {
 
     }
 
+    @Test(priority = 3)
+    public void homePageReportsLinkTest() {
+
+        homePage.clickOnReportsLink();
+        Assert.assertTrue(reportsPage.validateReportPageTitle(), "Cannot find the Reports section page title");
+        Assert.assertTrue(reportsPage.validateLeaveChart(), "Cannot find the Leave Chart in Reports section");
+        reportsPage.clickLeaveChart();
+
+    }
 
     @AfterMethod
     public void tearDown() {

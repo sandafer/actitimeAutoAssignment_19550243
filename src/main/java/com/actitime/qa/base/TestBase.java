@@ -41,9 +41,7 @@ public class TestBase {
 
         if (browserName.equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-//			System.setProperty("webdriver.chrome.driver", "//home//sanduni//Downloads//PageObjectModel_Demo-main//src//main//resources//chromedriver");
-//			System.setProperty("webdriver.chrome.driver", "//Users//methuliakithma//Documents//Trainings//UCSC//chromedriver");
-            driver = new ChromeDriver();
+			driver = new ChromeDriver();
         } else if (browserName.equals("Firefox")) {
             //System.setProperty("webdriver.gecko.driver", "//Users//methuliakithma//Documents//Trainings//UCSC//");
             driver = new FirefoxDriver();
