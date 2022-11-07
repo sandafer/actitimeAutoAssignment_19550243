@@ -7,11 +7,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class HomePageTest extends TestBase {
+public class UserPageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
-    public HomePageTest() {
+    UsersPage usersPage;
+    ReportsPage reportsPage;
+    TimeTrackPage timeTrackPage;
+    public UserPageTest() {
         super();
 
     }
@@ -22,17 +25,25 @@ public class HomePageTest extends TestBase {
         initialization();
         loginPage = new LoginPage();
         homePage = loginPage.loging(properties.getProperty("username"), properties.getProperty("password"));
+        usersPage = new UsersPage();
+        reportsPage = new ReportsPage();
+        timeTrackPage = new TimeTrackPage();
 
     }
 
 
-    @Test(priority = 1)
-    public void homePageLogoTest() {
+
+    @Test
+    public void validateViewUserProfileTest() {
         SoftAssert softAssertion= new SoftAssert();
-        boolean flag = homePage.validateActiTimeLogo();
-        softAssertion.assertTrue(flag, "Cannot find the Logo");
+        homePage.clickOnUsersLink();
+        softAssertion.assertTrue(usersPage.validateUserPageTitle(), "Cannot find the Users section page title");
+        softAssertion.assertTrue(usersPage.validateUserTable(), "Cannot find the Users Table");
+        softAssertion.assertTrue(usersPage.validateUserListCount(), "List of users in Users Table is zero");
         softAssertion.assertAll();
+
     }
+
 
 
         @AfterMethod

@@ -41,11 +41,12 @@ public class ReportsPage extends TestBase {
     }
 
     public void clickLeaveChart() {
-        driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         pastMonthsLeaveChartSection.click();
     }
 
     public String getReportName() {
+        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
         return reportNameInExpandedView.getText().trim();
     }
 

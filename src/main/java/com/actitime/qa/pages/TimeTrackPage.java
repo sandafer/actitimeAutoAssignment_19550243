@@ -46,6 +46,8 @@ public class TimeTrackPage extends TestBase {
     WebElement approveTable;
     @FindBy(className = "userNameInfo")
     List<WebElement> userNameListInApproveTable;
+    @FindBy(className = "noRecordsRow")
+    WebElement unoRecordsRowInApproveTable;
     @FindBy(xpath = "//table[@id='approveTTTable']//tbody[@class='data']//td//input[@type='checkbox']")
     WebElement approveTableFirstUserCheckBox;
 

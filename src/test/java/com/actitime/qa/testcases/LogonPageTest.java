@@ -4,11 +4,11 @@ import com.actitime.qa.base.TestBase;
 import com.actitime.qa.pages.HomePage;
 import com.actitime.qa.pages.LoginPage;
 import com.actitime.qa.util.TestUtil;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class LogonPageTest extends TestBase {
 
@@ -33,10 +33,10 @@ public class LogonPageTest extends TestBase {
 
     @Test(priority = 1)
     public void loginPageLogoTest() {
-
+        SoftAssert softAssertion= new SoftAssert();
         boolean flag = loginPage.validateActiTimeLogo();
-        Assert.assertTrue(flag);
-
+        softAssertion.assertTrue(flag);
+        softAssertion.assertAll();
     }
 
 
