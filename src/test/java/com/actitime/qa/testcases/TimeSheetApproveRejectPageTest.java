@@ -1,18 +1,24 @@
 package com.actitime.qa.testcases;
 
 import com.actitime.qa.base.TestBase;
-import com.actitime.qa.pages.*;
+import com.actitime.qa.pages.HomePage;
+import com.actitime.qa.pages.LoginPage;
+import com.actitime.qa.pages.TimeTrackPage;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 
 public class TimeSheetApproveRejectPageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
     TimeTrackPage timeTrackPage;
+
     public TimeSheetApproveRejectPageTest() {
         super();
 
@@ -28,9 +34,9 @@ public class TimeSheetApproveRejectPageTest extends TestBase {
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void validateRejectTimeTest() {
-        SoftAssert softAssertion= new SoftAssert();
+        SoftAssert softAssertion = new SoftAssert();
         System.out.println("AAAAAAAAAAAAAAA");
         homePage.clickOnTimeTrackLink();
         softAssertion.assertTrue(timeTrackPage.validateTimeTrackPageTitle(), "Cannot find the Time Track section page title");
@@ -46,32 +52,34 @@ public class TimeSheetApproveRejectPageTest extends TestBase {
         timeTrackPage.clickRejectBtn();
         softAssertion.assertAll();
     }
-    @Test(dependsOnMethods={"validateRejectTimeTest"})
-    public void validateRejectedTimeTestIsNotAllowedToBeRejectedAgain() {
-        SoftAssert softAssertion= new SoftAssert();
+
+    @Test(priority = 2)
+//    @Test(dependsOnMethods={"validateRejectTimeTest"})
+    public void validateRejectedTimeTestIsNotAllowedToBeRejectedAgain() throws InterruptedException {
+        SoftAssert softAssertion = new SoftAssert();
         System.out.println("BBBBBBBBBBBBBBBBBBBBB");
         homePage.clickOnTimeTrackLink();
         timeTrackPage.clickApproveTimeTrackPanel();
 
-        try{
-            timeTrackPage.selectFirstUserCheckBox();
-            timeTrackPage.clickRejectBtn();
-            System.out.println("Waiting for Alert");
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            System.out.println("Alert data: " + alertText);
-            softAssertion.assertEquals(alertText, "This operation was not applied to the entries because their current status coincides with the operation status.", "Incorrect Alert text is displayed");
-            alert.accept();
-        }
-        catch (Exception e){
-            System.out.println("Alert not Displayed");
-        }
+        timeTrackPage.selectFirstUserCheckBox();
+        timeTrackPage.clickRejectBtn();
+
+        Thread.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        Alert alert = driver.switchTo().alert();
+        String alertText = wait.until(ExpectedConditions.alertIsPresent()).getText();
+        System.out.println("Alert data: " + alertText);
+        softAssertion.assertEquals(alertText, "This operation was not applied to the entries because their current status coincides with the operation status.", "Incorrect Alert text is displayed");
+        alert.accept();
+
         softAssertion.assertAll();
 
     }
-    @Test(dependsOnMethods={"validateRejectedTimeTestIsNotAllowedToBeRejectedAgain"})
+
+    @Test(priority = 3)
+//    @Test(dependsOnMethods={"validateRejectedTimeTestIsNotAllowedToBeRejectedAgain"})
     public void validateApproveTimeTest() {
-        SoftAssert softAssertion= new SoftAssert();
+        SoftAssert softAssertion = new SoftAssert();
         System.out.println("CCCCCCCCCCCCCCCCCCC");
         homePage.clickOnTimeTrackLink();
         timeTrackPage.clickApproveTimeTrackPanel();
@@ -83,7 +91,8 @@ public class TimeSheetApproveRejectPageTest extends TestBase {
         softAssertion.assertAll();
     }
 
-        @AfterMethod
+
+    @AfterMethod
     public void tearDown() {
 
         driver.quit();

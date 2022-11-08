@@ -1,7 +1,8 @@
 package com.actitime.qa.testcases;
 
 import com.actitime.qa.base.TestBase;
-import com.actitime.qa.pages.*;
+import com.actitime.qa.pages.HomePage;
+import com.actitime.qa.pages.LoginPage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,6 +12,7 @@ public class HomePageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
+
     public HomePageTest() {
         super();
 
@@ -28,14 +30,14 @@ public class HomePageTest extends TestBase {
 
     @Test(priority = 1)
     public void homePageLogoTest() {
-        SoftAssert softAssertion= new SoftAssert();
+        SoftAssert softAssertion = new SoftAssert();
         boolean flag = homePage.validateActiTimeLogo();
         softAssertion.assertTrue(flag, "Cannot find the Logo");
         softAssertion.assertAll();
     }
 
 
-        @AfterMethod
+    @AfterMethod
     public void tearDown() {
 
         driver.quit();

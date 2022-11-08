@@ -14,6 +14,7 @@ public class UserPageTest extends TestBase {
     UsersPage usersPage;
     ReportsPage reportsPage;
     TimeTrackPage timeTrackPage;
+
     public UserPageTest() {
         super();
 
@@ -32,10 +33,9 @@ public class UserPageTest extends TestBase {
     }
 
 
-
     @Test
     public void validateViewUserProfileTest() {
-        SoftAssert softAssertion= new SoftAssert();
+        SoftAssert softAssertion = new SoftAssert();
         homePage.clickOnUsersLink();
         softAssertion.assertTrue(usersPage.validateUserPageTitle(), "Cannot find the Users section page title");
         softAssertion.assertTrue(usersPage.validateUserTable(), "Cannot find the Users Table");
@@ -45,8 +45,7 @@ public class UserPageTest extends TestBase {
     }
 
 
-
-        @AfterMethod
+    @AfterMethod
     public void tearDown() {
 
         driver.quit();

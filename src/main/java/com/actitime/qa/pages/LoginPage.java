@@ -31,7 +31,8 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "//div[@class='atLogoImg']")
     WebElement actiTimeLogo;
 
-
+    @FindBy(xpath = "//span[@class='errormsg']")
+    WebElement loginErrorMsg;
     //initialization
 
     public LoginPage() {
@@ -55,5 +56,22 @@ public class LoginPage extends TestBase {
         loginButton.click();
         return new HomePage();
 
+    }
+
+    public void invalidLogging(String uName, String password) throws InterruptedException {
+
+        userName.sendKeys(uName);
+        passWord.sendKeys(password);
+        loginButton.click();
+        Thread.sleep(200);
+
+    }
+
+    public String validateInvalidLogin() {
+        String errorMsgText = "";
+        if (loginErrorMsg.isDisplayed()) {
+            errorMsgText = loginErrorMsg.getText();
+        }
+        return errorMsgText;
     }
 }

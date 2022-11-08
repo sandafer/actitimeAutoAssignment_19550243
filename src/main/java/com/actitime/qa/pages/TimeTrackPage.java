@@ -14,7 +14,21 @@ public class TimeTrackPage extends TestBase {
     WebElement timeTrackPageTitle;
     @FindBy(linkText = "Approve Time-Track")
     WebElement approveTimeTrackNav;
-
+    // Start Approve time page
+    @FindBy(xpath = "//*[@class='pagetitle'][text() = 'Approve Time-Track']")
+    WebElement approveTimeTrackPageTitle;
+    @FindBy(id = "approveButton")
+    WebElement approveBtn;
+    @FindBy(id = "rejectButton")
+    WebElement rejectBtn;
+    @FindBy(id = "approveTTTable")
+    WebElement approveTable;
+    @FindBy(className = "userNameInfo")
+    List<WebElement> userNameListInApproveTable;
+    @FindBy(className = "noRecordsRow")
+    WebElement unoRecordsRowInApproveTable;
+    @FindBy(xpath = "//table[@id='approveTTTable']//tbody[@class='data']//td//input[@type='checkbox']")
+    WebElement approveTableFirstUserCheckBox;
     // Call init
     public TimeTrackPage() {
 
@@ -34,22 +48,6 @@ public class TimeTrackPage extends TestBase {
     public void clickApproveTimeTrackPanel() {
         approveTimeTrackNav.click();
     }
-
-    // Start Approve time page
-    @FindBy(xpath = "//*[@class='pagetitle'][text() = 'Approve Time-Track']")
-    WebElement approveTimeTrackPageTitle;
-    @FindBy(id = "approveButton")
-    WebElement approveBtn;
-    @FindBy(id = "rejectButton")
-    WebElement rejectBtn;
-    @FindBy(id = "approveTTTable")
-    WebElement approveTable;
-    @FindBy(className = "userNameInfo")
-    List<WebElement> userNameListInApproveTable;
-    @FindBy(className = "noRecordsRow")
-    WebElement unoRecordsRowInApproveTable;
-    @FindBy(xpath = "//table[@id='approveTTTable']//tbody[@class='data']//td//input[@type='checkbox']")
-    WebElement approveTableFirstUserCheckBox;
 
     // Methods
     public Boolean validateApproveTimeTrackPageTitle() {

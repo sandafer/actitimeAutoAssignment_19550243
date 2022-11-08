@@ -1,7 +1,9 @@
 package com.actitime.qa.testcases;
 
 import com.actitime.qa.base.TestBase;
-import com.actitime.qa.pages.*;
+import com.actitime.qa.pages.HomePage;
+import com.actitime.qa.pages.LoginPage;
+import com.actitime.qa.pages.ReportsPage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -32,7 +34,7 @@ public class ReportsPageTest extends TestBase {
 
     @Test
     public void validateReportsTest() {
-        SoftAssert softAssertion= new SoftAssert();
+        SoftAssert softAssertion = new SoftAssert();
         homePage.clickOnReportsLink();
         softAssertion.assertTrue(reportsPage.validateReportPageTitle(), "Cannot find the Reports section page title");
         softAssertion.assertTrue(reportsPage.validateLeaveChart(), "Cannot find the Leave Chart in Reports section");
@@ -48,7 +50,7 @@ public class ReportsPageTest extends TestBase {
     }
 
 
-        @AfterMethod
+    @AfterMethod
     public void tearDown() {
 
         driver.quit();

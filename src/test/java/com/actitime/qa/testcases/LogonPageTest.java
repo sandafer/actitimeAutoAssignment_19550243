@@ -4,6 +4,7 @@ import com.actitime.qa.base.TestBase;
 import com.actitime.qa.pages.HomePage;
 import com.actitime.qa.pages.LoginPage;
 import com.actitime.qa.util.TestUtil;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -14,7 +15,8 @@ public class LogonPageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
-    String sheetName = "Users";
+    String validTestDataSheetName = "ValidUsersCred";
+    String invalidTestDataSheetName = "InvalidUsersCred";
     TestUtil testUtil;
 
 
@@ -33,7 +35,7 @@ public class LogonPageTest extends TestBase {
 
     @Test(priority = 1)
     public void loginPageLogoTest() {
-        SoftAssert softAssertion= new SoftAssert();
+        SoftAssert softAssertion = new SoftAssert();
         boolean flag = loginPage.validateActiTimeLogo();
         softAssertion.assertTrue(flag);
         softAssertion.assertAll();
@@ -42,15 +44,29 @@ public class LogonPageTest extends TestBase {
 
     @DataProvider
 
-    public Object[][] getactiTimeTestData() {
-        Object data[][] = testUtil.getTestData(sheetName);
+    public Object[][] getValidLoginTestData() {
+        Object data[][] = testUtil.getTestData(validTestDataSheetName);
 
         return data;
 
 
     }
 
-    @Test(priority = 2, dataProvider = "getactiTimeTestData")
+    @DataProvider
+    public Object[][] getInvalidLoginTestData() {
+        Object data[][] = testUtil.getTestData(invalidTestDataSheetName);
+        return data;
+    }
+
+    @Test(dataProvider = "getInvalidLoginTestData")
+    public void validateInvalidUserLoginTest(String userName, String password) throws InterruptedException {
+
+        loginPage.invalidLogging(userName, password);
+        Assert.assertEquals(loginPage.validateInvalidLogin(), "Username or Password is invalid. Please try again.", "Invalid login error msg is not displayed");
+
+    }
+
+    @Test(priority = 2, dataProvider = "getValidLoginTestData")
     public void LoginTest(String userName, String password) {
 
         homePage = loginPage.loging(userName, password);
