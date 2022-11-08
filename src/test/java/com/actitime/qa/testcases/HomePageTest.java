@@ -8,11 +8,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.logging.Logger;
+
 public class HomePageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
-
     public HomePageTest() {
         super();
 

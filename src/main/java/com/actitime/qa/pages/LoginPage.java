@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import org.apache.log4j.Logger;
 public class LoginPage extends TestBase {
 
     //Page Factory - Object Repository
@@ -34,7 +34,7 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "//span[@class='errormsg']")
     WebElement loginErrorMsg;
     //initialization
-
+    public static Logger logger = Logger.getLogger(LoginPage.class);
     public LoginPage() {
 
         PageFactory.initElements(driver, this);
@@ -50,9 +50,11 @@ public class LoginPage extends TestBase {
     }
 
     public HomePage loging(String uName, String pword) {
-
+        logger.info("Typing user Name-----");
         userName.sendKeys(uName);
+        logger.info("Typing password-----");
         passWord.sendKeys(pword);
+        logger.info("Clicking login button-----");
         loginButton.click();
         return new HomePage();
 
@@ -60,17 +62,24 @@ public class LoginPage extends TestBase {
 
     public void invalidLogging(String uName, String password) throws InterruptedException {
 
+        logger.info("Typing user Name-----");
         userName.sendKeys(uName);
+        logger.info("Typing password-----");
         passWord.sendKeys(password);
+        logger.info("Clicking login button-----");
         loginButton.click();
-        Thread.sleep(200);
+        Thread.sleep(500);
 
     }
 
     public String validateInvalidLogin() {
         String errorMsgText = "";
         if (loginErrorMsg.isDisplayed()) {
+            logger.info("Login error msg is displayed-----");
             errorMsgText = loginErrorMsg.getText();
+        }
+        else {
+            logger.info("Login error msg is not displayed-----");
         }
         return errorMsgText;
     }

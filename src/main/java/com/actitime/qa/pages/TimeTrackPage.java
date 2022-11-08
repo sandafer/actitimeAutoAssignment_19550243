@@ -1,6 +1,7 @@
 package com.actitime.qa.pages;
 
 import com.actitime.qa.base.TestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,6 +30,8 @@ public class TimeTrackPage extends TestBase {
     WebElement unoRecordsRowInApproveTable;
     @FindBy(xpath = "//table[@id='approveTTTable']//tbody[@class='data']//td//input[@type='checkbox']")
     WebElement approveTableFirstUserCheckBox;
+
+    public static Logger logger = Logger.getLogger(TimeTrackPage.class);
     // Call init
     public TimeTrackPage() {
 
@@ -46,6 +49,7 @@ public class TimeTrackPage extends TestBase {
     }
 
     public void clickApproveTimeTrackPanel() {
+        logger.info("Clicking Approve Time Track-----");
         approveTimeTrackNav.click();
     }
 
@@ -60,26 +64,30 @@ public class TimeTrackPage extends TestBase {
     }
 
     public void clickApproveBtn() {
+        logger.info("Clicking Approve Button-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         approveBtn.click();
     }
 
     public void clickRejectBtn() {
+        logger.info("Clicking Reject Button-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         rejectBtn.click();
     }
 
     public void selectFirstUserCheckBox() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        logger.info("Getting users count in Approve table-----");
         if (userNameListInApproveTable.size() > 0) {
             approveTableFirstUserCheckBox.click();
         } else {
-            System.out.println("----List of users in Approve table is zero----");
+            logger.info("----List of users in Approve table is zero----");
             System.exit(0);
         }
     }
 
     public Boolean validateUserNameListCount() {
+        logger.info("Getting users count in Approve table-----");
         if (userNameListInApproveTable.size() == 0) {
             return false;
         } else

@@ -1,6 +1,7 @@
 package com.actitime.qa.pages;
 
 import com.actitime.qa.base.TestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,7 +19,7 @@ public class UsersPage extends TestBase {
     @FindBy(className = "userListRow")
     List<WebElement> userList;
 
-
+    public static Logger logger = Logger.getLogger(UsersPage.class);
     // Call init
     public UsersPage() {
 
@@ -38,6 +39,7 @@ public class UsersPage extends TestBase {
     }
 
     public Boolean validateUserListCount() {
+        logger.info("Getting user list count-----");
         if (userList.size() == 0) {
             return false;
         } else

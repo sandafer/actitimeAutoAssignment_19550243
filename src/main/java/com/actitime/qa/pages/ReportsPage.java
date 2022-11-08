@@ -1,6 +1,7 @@
 package com.actitime.qa.pages;
 
 import com.actitime.qa.base.TestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,7 +23,7 @@ public class ReportsPage extends TestBase {
     @FindBy(xpath = "//*[@id='createChartLightbox_cancelBtn']")
     WebElement cancelBtnInCreateChart;
 
-
+    public static Logger logger = Logger.getLogger(ReportsPage.class);
     // Call init
     public ReportsPage() {
 
@@ -41,21 +42,25 @@ public class ReportsPage extends TestBase {
     }
 
     public void clickLeaveChart() {
+        logger.info("Clicking past Months Leave Chart Section-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         pastMonthsLeaveChartSection.click();
     }
 
     public String getReportName() {
+        logger.info("get Report Name-----");
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
         return reportNameInExpandedView.getText().trim();
     }
 
     public void clickAttendanceChart() {
+        logger.info("Clicking Attendance Chart Section-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         attendanceChartSection.click();
     }
 
     public void clickCancelBtnInCreateChart() {
+        logger.info("Clicking Cancel Button-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         cancelBtnInCreateChart.click();
     }
